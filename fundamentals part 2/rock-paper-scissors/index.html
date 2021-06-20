@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<head>
+    <body>
+        <p style="text-align: center;">
+            Welcome to a game of Rock, Paper, Scissors
+        </p>
+
+        <script src="game.js"></script>
+        <script>
+            function game(){
+                let gameCounter = 0;
+
+                let playerScore = 0;
+                let cpuScore = 0;
+
+
+                while (gameCounter != 5){
+                    console.log("counter|playerScore|cpuScore");
+                    console.log(`${gameCounter}, ${playerScore}, ${cpuScore}`)
+                    let playerMove = prompt("What is your move.");
+                    console.log(playerMove);
+                    console.log(typeof(playerMove));
+                    while ((playerMove != "rock" && playerMove != "scissors" && playerMove != "paper")){
+                        playerMove = prompt("Wrong answer, give us your move.");
+                    }
+                    var round = playRound(playerMove, computerPlay());
+
+                    switch (round[1]){
+                        case 0:
+                            console.log(round[0]);
+                            cpuScore += 1; 
+                            gameCounter += 1;
+                            break;
+                        case 1:
+                            console.log(round[0]);
+                            playerScore += 1;
+                            gameCounter += 1;
+                            break;
+                        case 2:
+                            console.log(round[0]);
+                            playerScore += 2;
+                            cpuScore += 2;
+                            gameCounter += 1;
+
+                    }
+                } 
+
+                if (playerScore > cpuScore){
+                    return (`You won! The score was ${playerScore} to ${cpuScore}.`);
+                } else{
+                    return (`You lost. The score was ${cpuScore} to ${playerScore}.`);
+                }
+            }
+
+            let gameResult = game();
+
+            setTimeout( () => {
+
+                console.log("gameResult: " + gameResult);
+                document.getElementById("score").innerHTML = gameResult
+            }, 50);
+        </script>
+
+        <p id = "score" style = "text-align: center;">
+
+        </p>
+    </body>
+    </head>
